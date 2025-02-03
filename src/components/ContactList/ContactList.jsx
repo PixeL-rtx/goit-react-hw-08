@@ -14,18 +14,28 @@ import css from "./ContactList.module.css";
 export const ContactList = () => {
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const contacts = useSelector(selectFilteredContacts);
+  const contacts = useSelector(selectFilteredContacts) || [];
 
   return (
     <ul className={css.list}>
       {loading && <Loader />}
-      {!loading &&
-        contacts &&
-        !error &&
-        contacts.map(({ id, number, name }) => (
-          <Contact key={id} id={id} number={number} name={name} />
-        ))}
+      {!loading && Array.isArray(contacts) && contacts.length > 0 && !error
+        ? contacts.map(({ id, number, name }) => (
+            <Contact key={id} id={id} number={number} name={name} />
+          ))
+        : !loading && <p>No contacts found</p>}
       {error && <div>`Error: ${error} `</div>}
     </ul>
+    // <ul className={css.list}>
+    //       {loading && <Loader />}
+
+    //   {!loading &&
+    //     contacts &&
+    //     !error &&
+    //     contacts.map(({ id, number, name }) => (
+    //       <Contact key={id} id={id} number={number} name={name} />
+    //     ))}
+    //   {error && <div>`Error: ${error} `</div>}
+    // </ul>
   );
 };

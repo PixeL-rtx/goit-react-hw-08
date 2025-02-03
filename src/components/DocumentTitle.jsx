@@ -2,12 +2,11 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const DocumentTitle = ({ children }) => {
   return (
-    <Helmet>
-      <title>{children}</title>
-    </Helmet>
-    // <HelmetProvider>
-
-    // </HelmetProvider>
+    <HelmetProvider>
+      <Helmet>
+        <title>{children}</title>
+      </Helmet>
+    </HelmetProvider>
   );
 };
 

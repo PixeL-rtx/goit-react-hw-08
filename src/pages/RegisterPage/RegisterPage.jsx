@@ -5,7 +5,7 @@ export const RegisterPage = () => {
   return (
     <div>
       <DocumentTitle>Registration</DocumentTitle>
-      <RegistrationForm />
+      <RegisterForm />
     </div>
   );
 };
