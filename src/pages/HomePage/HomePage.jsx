@@ -1,4 +1,4 @@
-import DocumentTitle from "../../../src/components/DocumentTitle";
+import DocumentTitle from "../../components/DocumentTitle";
 
 const HomePage = () => {
   return (
@@ -6,7 +6,7 @@ const HomePage = () => {
       <DocumentTitle>Home Page</DocumentTitle>
       <h1>Welcome to the PhoneBook </h1>
 
-      <p>(Please register to start saving your contacts)</p>
+      {/* <p>(Please register to start saving your contacts)</p> */}
     </div>
   );
 };
