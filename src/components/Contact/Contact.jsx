@@ -1,9 +1,8 @@
-import { useDispatch } from "react-redux";
 import { IoIosContact } from "react-icons/io";
 import { MdPhoneInTalk } from "react-icons/md";
-import { deleteContact } from "../../redux/contacts/operations";
+
 import css from "./Contact.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
 import { contactReducer } from "../../redux/contacts/slice";
