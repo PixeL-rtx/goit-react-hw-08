@@ -6,8 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import Loader from "./Loader/Loader";
 import Layout from "./components/Layout";
-import { RestrictedRoute } from "./components/RestrictedRoute";
-import { PrivateRoute } from "./components/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -23,7 +23,7 @@ function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(refreshUser);
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (

@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // import { fetchInProgress, fetchSuccess, fetchError } from "./contactsSlice";
 // import { BiExit } from "react-icons/bi";
 
-axios.defaults.baseURL = "https://679247bbcf994cc680497339.mockapi.io";
+axios.defaults.baseURL = "https://connections-api.goit.global";
 
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",

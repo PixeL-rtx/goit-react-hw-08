@@ -1,6 +1,6 @@
 import DocumentTitle from "../../../src/components/DocumentTitle";
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <div>
       <DocumentTitle>Home Page</DocumentTitle>
@@ -10,3 +10,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;

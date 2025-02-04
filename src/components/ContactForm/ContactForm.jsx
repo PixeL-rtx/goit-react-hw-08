@@ -5,7 +5,7 @@ import { addContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
 import css from "./ContactForm.module.css";
 
-export const ContactForm = () => {
+const ContactForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     dispatch(addContact(values))
@@ -81,3 +81,5 @@ export const ContactForm = () => {
     </Formik>
   );
 };
+
+export default ContactForm;

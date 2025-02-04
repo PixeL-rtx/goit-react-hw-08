@@ -3,7 +3,7 @@ import { register } from "../../redux/auth/operations";
 
 import css from "./RegisterForm.module.css";
 
-export const RegisterForm = () => {
+const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -12,7 +12,7 @@ export const RegisterForm = () => {
 
     dispatch(
       register({
-        name: form.lements.name.value,
+        name: form.elements.name.value,
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
@@ -38,3 +38,4 @@ export const RegisterForm = () => {
     </form>
   );
 };
+export default RegisterForm;

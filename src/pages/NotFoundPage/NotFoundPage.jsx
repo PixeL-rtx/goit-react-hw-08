@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import DocumentTitle from "../../components/DocumentTitle";
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <div>
       <DocumentTitle>Page not found</DocumentTitle>
@@ -13,3 +13,4 @@ export const NotFoundPage = () => {
     </div>
   );
 };
+export default NotFoundPage;

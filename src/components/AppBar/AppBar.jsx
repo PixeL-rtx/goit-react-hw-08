@@ -5,7 +5,7 @@ import AuthNav from "../AuthNav/AuthNav";
 import css from "./AppBar.module.css";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
-export const AppBar = () => {
+const AppBar = () => {
   const isLoggenId = useSelector(selectIsLoggedIn);
 
   return (
@@ -16,3 +16,5 @@ export const AppBar = () => {
     </header>
   );
 };
+
+export default AppBar;
