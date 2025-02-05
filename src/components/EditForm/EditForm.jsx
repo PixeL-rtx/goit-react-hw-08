@@ -30,6 +30,8 @@ const handleClose = () => {
   dispatch(isEditField(false));
 };
 
+const pattern = /^\d{3}-?\d{2}-?\d{2}$/;
+
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
@@ -41,55 +43,67 @@ const validationSchema = Yup.object().shape({
 });
 
 return (
-  <Formik
-    initialValues={contactValues}
-    onSubmit={submitForm}
-    validationSchema={validationSchema}
-  >
-    <Form className={css.form}>
-      <div
-        style={{ position: "relative" }}
-        className="flex flex-col gap-2 w-2/3"
-      >
-        <label>Name</label>
-        <Field type="text" name="name" className={css.field} />
-        <ErrorMessage style={{ color: "tomato" }} name="name" component="div" />
-      </div>
-      <div
-        style={{ position: "relative" }}
-        className="flex flex-col gap-2 w-2/3"
-      >
-        <label htmlFor={numberFieldId}>Number</label>
-        <Field
-          type="text"
-          name="number"
-          style={{ outline: "none" }}
-          id={numberFieldId}
-          placeholder="xxx-xx-xx"
-          className="p-3 rounded-xl hover:border-red-400 sm:max-w-md"
-        />
-        <ErrorMessage
-          style={{ color: "tomato" }}
-          name="number"
-          component="div"
-        />
-      </div>
-      <div>
-        <button
-          className="p-3 rounded-xl border cursor-pointer hover:bg-green-200"
-          type="submit"
-          onSubmit={submitForm}
-        >
-          Edit
-        </button>
-        <button
-          onClick={handleClose}
-          className="p-3 rounded-xl border cursor-pointer hover:bg-red-200"
-          type="button"
-        >
-          Close
-        </button>
-      </div>
-    </Form>
-  </Formik>
+  <div className={css.modalOverlay}>
+    <Formik
+      initialValues={contactValues}
+      onSubmit={submitForm}
+      validationSchema={validationSchema}
+    >
+      <Form className={css.form}>
+        <div className={css.formInputWrapper}>
+          <label className={css.formLabel} htmlFor={nameFieldId}>
+            Name
+          </label>
+
+          <Field
+            id={nameFieldId}
+            type="text"
+            name="name"
+            className={css.formInput}
+          />
+
+          <ErrorMessage
+            style={{ color: "tomato" }}
+            name="name"
+            component="div"
+          />
+        </div>
+        <div className={css.formInputWrapper}>
+          <label className={css.formLabel} htmlFor={numberFieldId}>
+            Number
+          </label>
+          <Field
+            type="text"
+            name="number"
+            style={{ outline: "none" }}
+            id={numberFieldId}
+            placeholder="xxx-xx-xx"
+            className={css.formLabel}
+          />
+          <ErrorMessage
+            style={{ color: "tomato" }}
+            name="number"
+            component="div"
+            className={css.formErrorMessage}
+          />
+        </div>
+        <div className={css.formInputWrapper}>
+          <button
+            className={css.formButton}
+            type="submit"
+            onSubmit={submitForm}
+          >
+            Edit
+          </button>
+          <button
+            onClick={handleClose}
+            className={css.formButton}
+            type="button"
+          >
+            Close
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  </div>
 );

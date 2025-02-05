@@ -8,8 +8,8 @@ const Navigation = () => {
   const isLoggenId = useSelector(selectIsLoggedIn);
 
   return (
-    <nav>
-      <NavLink className={css.link} to="/">
+    <nav className={css.nav}>
+      <NavLink className={css.homeLink} to="/">
         Home
       </NavLink>
       {isLoggenId && (

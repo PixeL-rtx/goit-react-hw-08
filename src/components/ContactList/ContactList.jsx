@@ -1,11 +1,8 @@
 import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
 import Loader from "../../Loader/Loader";
-import {
-  selectError,
-  selectFilteredContacts,
-  selectIsLoading,
-} from "../../redux/contacts/selectors";
+import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
+import { selectFilteredContacts } from "../../redux/filters/selectors";
 import css from "./ContactList.module.css";
 
 // const getVisibleContacts = contacts.filter(({ name }) =>

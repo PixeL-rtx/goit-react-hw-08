@@ -3,7 +3,7 @@ import {
   addContact,
   deleteContact,
   fetchContacts,
-  updateContact,
+  editContact,
 } from "./operations";
 import { logOut } from "../auth/operations";
 // import { builder } from "vite";
@@ -57,15 +57,15 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.rejected, handleRejected);
     builder
-      .addCase(updateContact.pending, handlePending)
-      .addCase(updateContact.fulfilled, (state, { payload }) => {
+      .addCase(editContact.pending, handlePending)
+      .addCase(editContact.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.map((item) =>
           item.id === payload.id ? payload : item
         );
       })
-      .addCase(updateContact.rejected, handleRejected)
+      .addCase(editContact.rejected, handleRejected)
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.isLoading = false;
