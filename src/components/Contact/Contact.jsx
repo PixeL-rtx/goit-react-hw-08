@@ -82,7 +82,7 @@ const Contact = ({ name, number, id }) => {
         </li>
       </ul>
 
-      <div>
+      <div className={css.btnWrapper}>
         <button type="button" onClick={editContacts} className={css.btnContact}>
           Edit
         </button>

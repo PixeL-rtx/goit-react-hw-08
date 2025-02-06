@@ -9,7 +9,7 @@
 
 .formContact {
   margin: auto;
-  border: 2px solid green;
+  border: 2px solid rgb(0, 81, 128);
   border-radius: 8px;
   width: 320px;
   padding: 20px;
@@ -20,6 +20,7 @@
   text-align: start;
   display: block;
   margin-bottom: 8px;
+  color: #066b84;
 }
 
 .formInputWrapper {
@@ -29,10 +30,10 @@
 .formInput {
   width: 94.2%;
   padding: 10px;
-  border: 1px solid green;
+  border: 2px solid rgb(136, 138, 131);
   border-radius: 5px;
-  background-color: #001a00;
-  color: #64d4f0;
+  background-color: #a3a5a3;
+  color: #1127e9;
   font-size: 14px;
   margin-bottom: 24px;
 }
@@ -42,14 +43,14 @@
   top: 38px;
   left: 6px;
   font-size: 14px;
-  color: tomato;
+  color: rgb(244, 52, 18);
   font-weight: bold;
   padding: 4px 8px;
   border-radius: 4px;
 }
 
 .formButton {
-  background-color: #64d4f0;
+  background-color: #066b84;
   color: #001a00;
   border: none;
   padding: 10px 20px;

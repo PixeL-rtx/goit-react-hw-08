@@ -27,7 +27,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       {isRefreshing ? (
         <Loader />
       ) : (
@@ -71,7 +71,7 @@ function App() {
         </Layout>
       )}
       <Toaster position="top-right" reverseOrder={false} />
-    </>
+    </div>
   );
 }
 

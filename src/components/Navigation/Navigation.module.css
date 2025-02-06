@@ -3,17 +3,17 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 700;
-  color: #218521;
+  color: #066b84;
   font-size: 20px;
 }
 
 .homeLink:hover {
-  color: #00ff00;
+  color: #f3f9f3;
 }
 
 .link {
   font-weight: 700;
-  color: #218521;
+  color: #066b84;
   font-size: 20px;
   text-decoration: none;
 }

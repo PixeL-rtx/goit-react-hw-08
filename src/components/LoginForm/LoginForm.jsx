@@ -105,7 +105,7 @@ const LoginForm = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            <CiLogin /> <span>LogIn</span>
+            <CiLogin /> <span>Login</span>
           </button>
         </Form>
       )}
@@ -114,3 +114,6 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+// junir_html_css @gmail.com
+// Qwerty12345

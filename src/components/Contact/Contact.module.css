@@ -33,3 +33,7 @@
   padding: 0;
   padding-right: 20px;
 }
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+}

@@ -107,3 +107,5 @@ return (
     </Formik>
   </div>
 );
+
+export default EditForm;
