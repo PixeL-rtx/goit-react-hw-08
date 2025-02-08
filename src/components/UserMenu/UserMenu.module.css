@@ -11,13 +11,16 @@
 }
 
 .btnUser {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   padding: 12px;
   background-color: #170eba;
   color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  gap: 8px;
 }
 .btnUser :hover {
   background-color: #463df5;
