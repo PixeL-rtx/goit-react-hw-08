@@ -16,5 +16,9 @@
   justify-content: center;
   gap: 8px;
   padding: 12px;
+  background-color: #170eba;
+  color: white;
+}
+.btnUser :hover {
   background-color: #463df5;
 }
