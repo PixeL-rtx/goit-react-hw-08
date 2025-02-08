@@ -1,111 +1,134 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import css from "./EditForm.module.css";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { ImCancelCircle } from "react-icons/im";
+import { FaRegSave } from "react-icons/fa";
+import { useHotkeys } from "react-hotkeys-hook";
 
-import { nanoid } from "nanoid";
-import toast from "react-hot-toast";
-import { editContact } from "../../redux/contacts/operations";
-import { isEditField } from "../../redux/contacts/slice";
+import css from "./EditForm.module.css";
 
-const EditForm = () => {
-  const nameFieldId = nanoid();
-  const numberFieldId = nanoid();
-  const dispatch = useDispatch();
-};
+import { selectContacts } from "../../redux/contacts/selectors";
 
-const contactValues = {
-  name: "",
-  number: "",
-};
-
-const submitForm = (values, actions) => {
-  dispatch(editContact(values));
-  dispatch(isEditField(false));
-  toast.success("Edit");
-  actions.resetForm();
-};
-
-const handleClose = () => {
-  dispatch(isEditField(false));
-};
-
-const pattern = /^\d{3}-?\d{2}-?\d{2}$/;
-
-const validationSchema = Yup.object().shape({
+const ContactSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too long!")
-    .required("Required"),
+    .min(3, `The "Name" is too Short!`)
+    .max(50, `The "Name" is too Long!`)
+    .required('The "Name" is Required field!'),
   number: Yup.string()
-    .matches(pattern, "Invalid phone number")
-    .required("Required"),
+    .min(3, `The "Number" is too Short!`)
+    .max(50, `The "Number" is too Long!`)
+    .required('The "Number" is Required field!'),
 });
 
-return (
-  <div className={css.modalOverlay}>
-    <Formik
-      initialValues={contactValues}
-      onSubmit={submitForm}
-      validationSchema={validationSchema}
-    >
-      <Form className={css.form}>
-        <div className={css.formInputWrapper}>
-          <label className={css.formLabel} htmlFor={nameFieldId}>
-            Name
-          </label>
+const EditForm = ({ handleUpdateContact, handleCloseModal, id }) => {
+  const contacts = useSelector(selectContacts);
 
-          <Field
-            id={nameFieldId}
-            type="text"
-            name="name"
-            className={css.formInput}
-          />
+  const contact = useMemo(
+    () => contacts.find((contact) => contact.id === id),
+    [contacts, id]
+  );
 
-          <ErrorMessage
-            style={{ color: "tomato" }}
-            name="name"
-            component="div"
-          />
-        </div>
-        <div className={css.formInputWrapper}>
-          <label className={css.formLabel} htmlFor={numberFieldId}>
-            Number
-          </label>
-          <Field
-            type="text"
-            name="number"
-            style={{ outline: "none" }}
-            id={numberFieldId}
-            placeholder="xxx-xx-xx"
-            className={css.formLabel}
-          />
-          <ErrorMessage
-            style={{ color: "tomato" }}
-            name="number"
-            component="div"
-            className={css.formErrorMessage}
-          />
-        </div>
-        <div className={css.formInputWrapper}>
-          <button
-            className={css.formButton}
-            type="submit"
-            onSubmit={submitForm}
-          >
-            Edit
-          </button>
-          <button
-            onClick={handleClose}
-            className={css.formButton}
-            type="button"
-          >
-            Close
-          </button>
-        </div>
-      </Form>
-    </Formik>
-  </div>
-);
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    number: "",
+  });
+
+  useEffect(() => {
+    if (contact) {
+      setInitialValues({
+        name: contact ? contact.name : "",
+        number: contact ? contact.number : "",
+      });
+    }
+  }, [contact]);
+
+  const handleSubmit = (values, actions) => {
+    handleUpdateContact({ id, ...values });
+
+    actions.setSubmitting(false);
+    actions.resetForm();
+  };
+
+  useHotkeys("esc", () => handleCloseModal());
+
+  return (
+    <div className={css.modalOverlay}>
+      <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={ContactSchema}
+      >
+        {({ isSubmitting, values, handleReset, handleChange }) => (
+          <div>
+            <Form className={css.form}>
+              <label className={css.formLabel} htmlFor="name">
+                Name
+              </label>
+              <div className={css.formInputWrapper}>
+                <Field
+                  className={css.formInput}
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  placeholder="Enter FirstName and LastName"
+                  id="name"
+                  onChange={handleChange}
+                />
+                <ErrorMessage
+                  className={css.formErrorMessage}
+                  name="name"
+                  component="div"
+                />
+              </div>
+
+              <label className={css.formLabel} htmlFor="number">
+                Number
+              </label>
+              <div className={css.formInputWrapper}>
+                <Field
+                  className={css.formInput}
+                  type="tel"
+                  name="number"
+                  value={values.number}
+                  placeholder="Phone format: XXX-XXX-XXXX"
+                  id="number"
+                  onChange={handleChange}
+                />
+                <ErrorMessage
+                  className={css.formErrorMessage}
+                  name="number"
+                  component="div"
+                />
+              </div>
+              <div className={css.btnWrapper}>
+                <button
+                  className={css.formButton}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  <FaRegSave />
+                  <span>Save</span>
+                </button>
+                <button
+                  className={css.formButton}
+                  type="button"
+                  onClick={() => {
+                    handleReset();
+                    handleCloseModal();
+                  }}
+                >
+                  <ImCancelCircle />
+                  <span>Cancel</span>
+                </button>
+              </div>
+            </Form>
+          </div>
+        )}
+      </Formik>
+    </div>
+  );
+};
 
 export default EditForm;

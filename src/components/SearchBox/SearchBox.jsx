@@ -19,6 +19,7 @@ const SearchBox = () => {
           name="search"
           placeholder=""
           value={value}
+          inputMode="search"
           onChange={(e) => handleChange(e.target.value)}
         />
         Find contacts by name

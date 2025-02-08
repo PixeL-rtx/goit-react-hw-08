@@ -1,96 +1,100 @@
-// import { IoIosContact } from "react-icons/io";
-// import { MdPhoneInTalk } from "react-icons/md";
-
-// import css from "./Contact.module.css";
-// import { useDispatch } from "react-redux";
-// import { deleteContact } from "../../redux/contacts/operations";
-// import toast from "react-hot-toast";
-
-// import ContactForm from "../ContactForm/ContactForm";
-// import { contactReducer } from "../../redux/contacts/slice";
-
-// const Contact = ({ name, number, id }) => {
-//   const dispatch = useDispatch();
-
-//   const editContacts = () => {
-//     dispatch(contactReducer({ id, name: "", number: "" }));
-//   };
-
-//   const deleteNumber = () => {
-//     dispatch(deleteContact(id));
-//     toast.success("Deleted");
-//   };
-
-//   return (
-//     <li className={css.item}>
-//       <ul className={css.contact_List}>
-//         <li className={css.contact}>
-//           <IoIosContact />
-//           <p>{name}</p>
-//         </li>
-//         <li className={css.contact}>
-//           <MdPhoneInTalk />
-//           <p>{number}</p>
-//         </li>
-//       </ul>
-
-//       <div>
-//         <button type="button" onClick={editContacts} className={css.btnContact}>
-//           Edit
-//         </button>
-//         <button type="button" onClick={deleteNumber} className={css.btnContact}>
-//           Delete
-//         </button>
-//       </div>
-//     </li>
-//   );
-// };
-// export default Contact;
-
-//////////
-
 import { IoIosContact } from "react-icons/io";
 import { MdPhoneInTalk } from "react-icons/md";
-
+import { AiOutlineUserDelete } from "react-icons/ai";
+import { LiaUserEditSolid } from "react-icons/lia";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact, editContact } from "../../redux/contacts/operations";
-import toast from "react-hot-toast";
+import { deleteContact, updateContact } from "../../redux/contacts/operations";
+import EditForm from "../EditForm/EditForm";
+import DeleteContactModal from "../DeleteContact/DeleteContact";
+import { useEffect, useRef, useState } from "react";
 
-const Contact = ({ name, number, id }) => {
+const Contact = ({ contact }) => {
+  const bodyRef = useRef(document.body);
   const dispatch = useDispatch();
 
-  const editContacts = () => {
-    dispatch(editContact({ id, updatedData: { name: "", number: "" } }));
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  useEffect(() => {
+    const body = bodyRef.current;
+    isEditModalOpen || isDeleteModalOpen
+      ? body.classList.add("disable-scroll")
+      : body.classList.remove("disable-scroll");
+
+    return () => {
+      body.classList.remove("disable-scroll");
+    };
+  }, [isEditModalOpen, isDeleteModalOpen]);
+
+  const handleDelete = () => {
+    handleCloseDeleteModal();
+    dispatch(deleteContact(contact.id));
   };
 
-  const deleteNumber = () => {
-    dispatch(deleteContact(id));
-    toast.success("Deleted");
+  const handleUpdateContact = (modifiedContact) => {
+    handleCloseEditModal();
+    dispatch(updateContact(modifiedContact));
   };
+
+  const handleOpenEditNodal = () => setIsEditModalOpen(true);
+
+  const handleCloseEditModal = () => setIsEditModalOpen(false);
+
+  const handleOpenDeleteNodal = () => setIsDeleteModalOpen(true);
+
+  const handleCloseDeleteModal = () => setIsDeleteModalOpen(false);
 
   return (
-    <li className={css.item}>
-      <ul className={css.contact_List}>
-        <li className={css.contact}>
-          <IoIosContact />
-          <p>{name}</p>
-        </li>
-        <li className={css.contact}>
-          <MdPhoneInTalk />
-          <p>{number}</p>
-        </li>
-      </ul>
+    <ul className={css.list}>
+      <li className={css.contactItem}>
+        <div className={css.textWrapper}>
+          <div className={css.contactContext}>
+            <IoIosContact />
+            <span>{contact.name}</span>
+          </div>
+          <div className={css.contactContext}>
+            <MdPhoneInTalk />
+            <a href={`tel: ` + contact.number}>{contact.number}</a>
+          </div>
+        </div>
+        <div className={css.btnWrapper}>
+          <button
+            onClick={handleOpenEditNodal}
+            type="button"
+            aria-label="edit button"
+            className={css.btn_Contact}
+          >
+            <span>Edit</span>
+            {/* <LiaUserEditSolid color="#00ff00" /> */}
+          </button>
+          <button
+            onClick={handleOpenDeleteNodal}
+            type="button"
+            aria-label="delete button"
+            className={css.btn_Contact}
+          >
+            <span>Delete</span>
+            {/* <AiOutlineUserDelete color="#00ff00" /> */}
+          </button>
+        </div>
+      </li>
 
-      <div className={css.btnWrapper}>
-        <button type="button" onClick={editContacts} className={css.btnContact}>
-          Edit
-        </button>
-        <button type="button" onClick={deleteNumber} className={css.btnContact}>
-          Delete
-        </button>
-      </div>
-    </li>
+      {isEditModalOpen && (
+        <EditForm
+          handleCloseModal={handleCloseEditModal}
+          handleUpdateContact={handleUpdateContact}
+          id={contact.id}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteContactModal
+          contact={contact}
+          handleDelete={handleDelete}
+          handleCancel={handleCloseDeleteModal}
+        />
+      )}
+    </ul>
   );
 };
 

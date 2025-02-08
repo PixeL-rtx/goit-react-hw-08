@@ -1,6 +1,6 @@
-.item {
+.contactItem {
   text-align: center;
-  gap: 10px;
+  /* gap: 10px; */
   margin: 10px 0;
   padding: 15px;
   background-color: #ffffff;
@@ -8,10 +8,11 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
+  /* display: flex; */
   /* flex-direction: column; */
-  justify-content: center;
+
   align-items: center;
+  list-style: none;
 }
 
 .item:hover {
@@ -19,21 +20,52 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.contact {
+.contactContext span {
+  font-size: 16px;
+}
+.contactContext {
   display: flex;
-  gap: 8px;
   align-items: center;
-  list-style: none;
+  justify-items: center;
+}
+.textWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: row; */
+  gap: 15px;
+  align-items: center;
 }
 
-.contact:first-child {
-  margin-bottom: 10px;
+.textWrapper :first-child {
+  display: flex;
+  gap: 10px;
+  /* margin-bottom: 10px; */
+}
+.textWrapper :last-child {
+  display: flex;
+  gap: 10px;
 }
 .contact_List {
   padding: 0;
   padding-right: 20px;
+  align-items: center;
+  justify-items: center;
 }
 .btnWrapper {
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  justify-content: center;
+}
+.btn_Contact {
+  /* width: 85px; */
+
+  padding: 12px;
+  background-color: #170eba;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
 }

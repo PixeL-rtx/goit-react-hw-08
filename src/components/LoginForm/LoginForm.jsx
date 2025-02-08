@@ -8,6 +8,13 @@ import { login } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+// junir_html_css@gmail.com
+// Qwerty12345
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
@@ -17,11 +24,6 @@ const RegistrationSchema = Yup.object().shape({
     .matches(passwordRules, "Please enter a valid password!")
     .required("Password is required!"),
 });
-
-const initialValues = {
-  email: "",
-  password: "",
-};
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -114,6 +116,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-// junir_html_css @gmail.com
-// Qwerty12345

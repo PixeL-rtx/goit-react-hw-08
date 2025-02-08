@@ -3,7 +3,7 @@ import {
   addContact,
   deleteContact,
   fetchContacts,
-  editContact,
+  updateContact,
 } from "./operations";
 import { logOut } from "../auth/operations";
 // import { builder } from "vite";
@@ -11,6 +11,13 @@ import { logOut } from "../auth/operations";
 // const initialState = {
 //   items: contacts,
 // };
+
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+  // isOpenFieldForEdit: false,
+};
 const handlePending = (state) => {
   state.isLoading = true;
 };
@@ -22,11 +29,13 @@ const handleRejected = (state, action) => {
 
 const contactsSlice = createSlice({
   name: "contacts",
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
+  initialState,
+
+  // reducers: {
+  //   openEditForm: (state, action) => {
+  //     state.isOpenFieldForEdit = action.payload;
+  //   },
+  // },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, handlePending)
@@ -57,15 +66,15 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.rejected, handleRejected);
     builder
-      .addCase(editContact.pending, handlePending)
-      .addCase(editContact.fulfilled, (state, { payload }) => {
+      .addCase(updateContact.pending, handlePending)
+      .addCase(updateContact.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.map((item) =>
           item.id === payload.id ? payload : item
         );
       })
-      .addCase(editContact.rejected, handleRejected)
+      .addCase(updateContact.rejected, handleRejected)
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.isLoading = false;
@@ -75,3 +84,4 @@ const contactsSlice = createSlice({
 });
 
 export const contactReducer = contactsSlice.reducer;
+// export const { openEditForm } = contactsSlice.actions;

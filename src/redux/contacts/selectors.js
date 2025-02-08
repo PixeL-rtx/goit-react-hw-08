@@ -7,6 +7,9 @@ export const selectIsLoading = (state) => state.contacts.isLoading;
 
 export const selectError = (state) => state.contacts.error;
 
+export const selectIsOpenFieldForEdit = (state) =>
+  state.contacts.isOpenFieldForEdit;
+
 // export const selectStatusFilter = (state) => state.contacts.filters.status;
 
 // export const selectFilteredContacts = createSelector(

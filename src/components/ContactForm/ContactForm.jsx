@@ -7,6 +7,7 @@ import css from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
     dispatch(addContact(values))
       .unwrap()
@@ -46,10 +47,15 @@ const ContactForm = () => {
     >
       {({ isSubmitting }) => (
         <Form className={css.form}>
-          <label>
+          <label className={css.label_Contact}>
             Name
             <div>
-              <Field className={css.field} type="text" name="name" />
+              <Field
+                className={css.field}
+                type="text"
+                name="name"
+                placeholder="Enter First Name "
+              />
               <ErrorMessage
                 name="name"
                 component="div"
@@ -57,7 +63,7 @@ const ContactForm = () => {
               />
             </div>
           </label>
-          <label>
+          <label className={css.label_Contact}>
             Number
             <div>
               <Field
@@ -65,6 +71,7 @@ const ContactForm = () => {
                 type="tel"
                 inputMode="tel"
                 name="number"
+                placeholder="Phone: XXX-XXX-XXXX"
               />
               <ErrorMessage
                 name="number"

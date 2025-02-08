@@ -1,0 +1,30 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-size: 18px;
+  background-color: #052f42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 20dvw;
+  border: 2px solid rgb(7, 188, 216);
+  background-color: #052f42;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.modal b {
+  color: #00ffff;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
